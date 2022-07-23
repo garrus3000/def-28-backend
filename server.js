@@ -15,7 +15,6 @@ import MongoStore from 'connect-mongo';
 
 import passport from './src/routes/passport-local.js';
 
-import routerLogin from './src/routes/loginAndLogout.js';
 import routesHBS from './src/routes/routes.js';
 
 const app = express();
@@ -56,19 +55,25 @@ app.use(
         saveUninitialized: true,
         rolling: true,
         cookie: {
-            // maxAge: 1000 * 60 * 10,
-            maxAge: 1000 * 15 ,
+            maxAge: 1000 * 60 * 10,
         },
     })
 );
-   
 
+// fake data productos, faker.js
 app.use("/api", routerProducto);
 
 // ROOT - HOME
 app.get("/", routesHBS.getRoot);
-app.get("/signup", routesHBS.getSignup);
 app.get("/home", routesHBS.getHome);
+
+// SIGNUP
+app.
+    route("/signup")
+        .get(routesHBS.getSignup)
+        .post(passport.authenticate("signup", {successRedirect:"/login", failureRedirect:"/failsignup"}));
+;
+app.get("/failsignup", routesHBS.getFailSignup);
 
 //  LOGIN
 app.
@@ -76,36 +81,11 @@ app.
         .get(routesHBS.getLogin)
         .post(passport.authenticate("login", {successRedirect:"/home", failureRedirect:"/faillogin"}), routesHBS.postLogin);
 ;
+app.get('/faillogin', routesHBS.getFailLogin);
 
-
-
-// // ROOT - HOME
-// app.get('/', routerLogin.getRoot);
-// app.get('/home', routerLogin.getHome)
-
-// //  SIGNUP
-// app.
-//     route("/signup")
-//         .get(routerLogin.getSignup)
-//         .post(passport.authenticate("signup", {successRedirect:"/login", failureRedirect:"/failsignup"}));
-// ;    
-// app.get('/failsignup', routerLogin.getFailSignup);
-
-
-// //  LOGIN
-// app.
-//     route("/login")
-//         .get(routerLogin.getLogin)
-//         .post(passport.authenticate("login", {successRedirect:"/home", failureRedirect:"/faillogin"}), routerLogin.postLogin);
-// ;
-// app.get('/faillogin', routerLogin.getFailLogin);
-
-
-// // LOGOUT 
-// app.get('/user', routerLogin.getUser); // extraer Session user
-// app.get("/logout", routerLogin.getLogout);
-// app.get('/crl', routerLogin.getCrl);
-
+// LOGOUT
+app.get("/logout", routesHBS.isItLogged, routesHBS.getLogout);
+app.get("/getuser", routesHBS.isItLogged, routesHBS.getUser);
 
 
 

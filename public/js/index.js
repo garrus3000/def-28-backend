@@ -98,14 +98,14 @@ const renderCompresion = (msj) => {
     _mostrarCompHTML.innerHTML = `Compresion: ${compresion} %`;
 }
 
-const fetchHome =  () => {
-    fetch("/home")
+const FetchUser = () => {
+    fetch("/getuser")
         .then((response) => response)
-        .then((data) => console.log(data.map((el) => el )))
-}
+        .then((data) => data === data.text().then((user) => console.log("User: ",user)));
+};
 
 /*
-    Con funcion fetchHome() en socket.on("messages")
+    Con funcion FetchUser() en socket.on("messages")
     se renueva el tiempo de session por cada mensaje escrito
     porque hace request a '/home' que vuelve a setear el Session,
     con rolling: true en server.js, pq resave no funciona bien para MongoDb
@@ -113,7 +113,7 @@ const fetchHome =  () => {
 socket.on("messages", (msj) => {
     renderMensajes(msj);
     renderCompresion(msj);
-    fetchHome();
+    FetchUser();
 });
 
 const btnLogout = () => {
