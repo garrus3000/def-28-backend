@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Pructos y Mensajes</title>
+</head>
+<body>
+    <h1 class="fs-5 text-center text-bg-success p-2">Clase 26 Def: "LOG-IN por Formulario/Mongodb"</h1>
+
+    <div class="alert alert-secondary alert-dismissible container mt-5 bg-light p-2 border border-1">
+        <div class="fs-3 text-success">
+            Bienvenido
+            <span class="text-secondary fs-4 fw-light" id="userName"><div class="spinner-border"></div></span>
+            <button class="btn btn-warning float-end m-2" id="btnLogout">Logout</button>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-3 text-primary">Productos <span class="text-secondary">(HBS)</span></h2>
+    <div class="container mt-4 bg-light p-2 border">
+        <div id="productos"></div>
+    </div>
+    <div class="container mt-5 bg-light p-2 border border-1">
+        <form id="enviarMensaje">
+            <h2 class="text-center mt-3 text-primary">Centro de Mensajes <span class="text-secondary">(JSON)</span></h2>
+            <h3 id="compresion" class="text-center mt-3 text-primary"> Compresión: % </h3>        
+            <div class="container col-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" name="nombre">
+                <label for="apellido">Apellido</label>
+                <input type="text" class="form-control" name="apellido">
+                <label for="edad">Edad</label>
+                <input type="number" class="form-control" name="edad">
+                <label for="alias">Alias</label>
+                <input type="text" class="form-control" name="alias">
+                <label for="avatar">Url foto de perfil</label>
+                <input type="url" class="form-control" name="avatar">
+                <label for="message">Mensaje</label>
+                <textarea class="form-control" name="text" rows="3" id="text"></textarea>
+                <button type="submit" class="btn btn-primary m-2">Enviar</button>
+            </div>
+        </form>
+        <hr>
+        <div class="container" id="messages"></div>
+    </div>
+    
+    
+    <footer class="fs-5 text-center text-bg-warning p-2 text-secondary"><p>&copy; 2022 - Odriozola Eduardo</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    <script src="../js/index.js"></script>
+    
+</body>
+
+</html>
