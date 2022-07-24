@@ -1,13 +1,15 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 import passport from "passport";
 import {Strategy as LocalStrategy} from 'passport-local';
 import bcrypt from 'bcrypt';
 
 
 import mongoose from 'mongoose';
-// mongoose.connect('mongodb://localhost/ecommerce');
 
 mongoose.connect(
-    "mongodb+srv://OdriozolaEduardo:backend.coder@cluster0.0fgn7.mongodb.net/ecommerce?retryWrites=true&w=majority",
+    process.env.MONGO_URL,
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 

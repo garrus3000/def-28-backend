@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express';
 import { Server as HttpServer } from 'http';
 import { Server as IOServer } from 'socket.io';
@@ -46,11 +49,10 @@ app.use(cookieParser());
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl:
-                "mongodb+srv://OdriozolaEduardo:backend.coder@cluster0.0fgn7.mongodb.net/ecommerce?retryWrites=true&w=majority",
+            mongoUrl:process.env.MONGO_URL,
             mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
         }),
-        secret: "miSecreto",
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
         rolling: true,
