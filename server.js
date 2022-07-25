@@ -21,6 +21,8 @@ import passport from './src/routes/passport-local.js';
 
 import routesHBS from './src/routes/routes.js';
 import routerInfo from './src/routes/info.js';
+import yargArgs from './src/routes/yarg-cli.js';
+import yargs from 'yargs';
 
 const app = express();
 const httpServer = new HttpServer(app)
@@ -122,7 +124,9 @@ app.use((req, res) => {
 });
 
 
-const PORT = process.argv[2] || 8080; // funciona con npm start, npm run start N y node server.js 
+// const PORT = process.argv[2] || 8080; //node server N || npm start N
+
+const PORT = yargArgs.puerto; // node server -p N || npm start -- -p N
 httpServer.listen(PORT, (err) => {
     if(err) new Error (console.log(err));
     else console.log(`Servidor corriendo en el puerto: ${PORT} `);
