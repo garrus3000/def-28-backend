@@ -22,8 +22,9 @@ import passport from './src/routes/passport-local.js';
 import routesHBS from './src/routes/routes.js';
 import routerInfo from './src/routes/info.js';
 import yargArgs from './src/routes/yarg-cli.js';
-import yargs from 'yargs';
-import routerRandomNums from './src/routes/random-nums.js';
+
+import randomNumber from './src/routes/forked/random-nums.js';
+import routerRandomNums from './src/routes/forked/fork-random-nums.js';
 
 const app = express();
 const httpServer = new HttpServer(app)
@@ -95,8 +96,10 @@ app.get("/logout", routesHBS.isItLogged, routesHBS.getLogout);
 app.get("/getuser", routesHBS.isItLogged, routesHBS.getUser);
 
 
-// INFO and RANDOM NUMBERS
+// INFO
 app.use('/info', routerInfo);
+
+// RANDOM NUMBERS forked process
 app.use('/api/randoms', routerRandomNums);
 
 
