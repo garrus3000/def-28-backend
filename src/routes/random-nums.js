@@ -4,17 +4,14 @@ const routerRandomNums = Router();
 
 routerRandomNums.get("/", (req, res) => {
     const cant = req.query.cant || 100000000;
-    const numeros = [];
+    const resultados = {};
 
     for (let i = 0; i < cant; i++) {
-        numeros.push(Math.floor(Math.random() * 1000) + 1);
+        const numeroAleatorio = Math.floor(Math.random() * 1000) + 1;
+        if (resultados[numeroAleatorio]) resultados[numeroAleatorio]++;
+        else resultados[numeroAleatorio] = 1;
     }
-    const numeroRepetidos = numeros.reduce((acc, val) => {
-        if (acc[val]) acc[val]++;
-        else acc[val] = 1;
-        return acc;
-    }, {});
-    res.send(numeroRepetidos);
+    res.send(resultados);
 });
 
 export default routerRandomNums;
