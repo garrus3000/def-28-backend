@@ -23,6 +23,7 @@ import routesHBS from './src/routes/routes.js';
 import routerInfo from './src/routes/info.js';
 import yargArgs from './src/routes/yarg-cli.js';
 import yargs from 'yargs';
+import routerRandomNums from './src/routes/random-nums.js';
 
 const app = express();
 const httpServer = new HttpServer(app)
@@ -93,7 +94,10 @@ app.get('/faillogin', routesHBS.getFailLogin);
 app.get("/logout", routesHBS.isItLogged, routesHBS.getLogout);
 app.get("/getuser", routesHBS.isItLogged, routesHBS.getUser);
 
+
+// INFO and RANDOM NUMBERS
 app.use('/info', routerInfo);
+app.use('/api/randoms', routerRandomNums);
 
 
 ioServer.on("connection", async (socket) => {

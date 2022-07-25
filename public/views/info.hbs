@@ -2,18 +2,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p class="text-primary fs-5">Argumentos de entrada : [
+            <p class="text-primary fs-5">Argumentos de entrada :
+                [
                 <span class="text-dark">
                     {{#each infoProyecto.argumentos}}
                     <br>
                     {{this}}
                     {{/each}}
                 </span>
-            ]</p>
+                ]
+            </p>
             <p class="text-primary fs-5">Plataforma : <span class="text-dark">{{infoProyecto.plataforma}}</span></p>
             <p class="text-primary fs-5">Versión de Node.js : <span class="text-dark">{{infoProyecto.versionNode}}</span></p>
             <p class="text-primary fs-5">Memoria total reservada : <span class="text-dark">{{infoProyecto.memoriaTotalReservada}}</span></p>
-            <p class="text-primary fs-5">Path de ejecución: <span class="text-dark">{{infoProyecto.pathEjecucion}}</span></p>
+            <p class="text-primary fs-5">Path de ejecución Node : <span class="text-dark">{{infoProyecto.pathEjecucion}}</span></p>
             <p class="text-primary fs-5">Proccess Id : <span class="text-dark">{{infoProyecto.processId}}</span></p>
             <p class="text-primary fs-5">Directorio actual del trabajo : <span class="text-dark">{{infoProyecto.directorioActualTrabajo}}</span></p>
     </div>
