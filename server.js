@@ -1,5 +1,6 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
+// import * as dotenv from 'dotenv'
+import  dotenv from 'dotenv'
+dotenv.config();
 
 import express from 'express';
 import { Server as HttpServer } from 'http';
@@ -19,6 +20,7 @@ import MongoStore from 'connect-mongo';
 import passport from './src/routes/passport-local.js';
 
 import routesHBS from './src/routes/routes.js';
+import routerInfo from './src/routes/info.js';
 
 const app = express();
 const httpServer = new HttpServer(app)
@@ -49,7 +51,7 @@ app.use(cookieParser());
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl:process.env.MONGO_URL,
+            mongoUrl:process.env.MONGO_ATLAS_URL,
             mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
         }),
         secret: process.env.SESSION_SECRET,
@@ -89,6 +91,7 @@ app.get('/faillogin', routesHBS.getFailLogin);
 app.get("/logout", routesHBS.isItLogged, routesHBS.getLogout);
 app.get("/getuser", routesHBS.isItLogged, routesHBS.getUser);
 
+app.use('/info', routerInfo);
 
 
 ioServer.on("connection", async (socket) => {
@@ -119,8 +122,8 @@ app.use((req, res) => {
 });
 
 
-const PORT = 8080;
+const PORT = process.argv[2] || 8080; // funciona con npm start, npm run start N y node server.js 
 httpServer.listen(PORT, (err) => {
     if(err) new Error (console.log(err));
-    else console.log(`Servidor corriendo en el puerto ${PORT}`);
+    else console.log(`Servidor corriendo en el puerto: ${PORT} `);
 });

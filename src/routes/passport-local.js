@@ -1,4 +1,5 @@
-import * as dotenv from 'dotenv'
+// import * as dotenv from 'dotenv'
+import  dotenv from 'dotenv'
 dotenv.config()
 
 import passport from "passport";
@@ -9,7 +10,7 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 
 mongoose.connect(
-    process.env.MONGO_URL,
+    process.env.MONGO_ATLAS_URL,
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
