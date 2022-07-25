@@ -3,12 +3,18 @@ import { Router } from "express";
 const routerRandomNums = Router();
 
 routerRandomNums.get("/", (req, res) => {
-    const cantidad = req.query.cantidad || 10;
+    const cant = req.query.cant || 100000000;
     const numeros = [];
-    for (let i = 0; i < cantidad; i++) {
-        numeros.push(Math.floor(Math.random() * 100));
+
+    for (let i = 0; i < cant; i++) {
+        numeros.push(Math.floor(Math.random() * 1000) + 1);
     }
-    res.json(numeros);
+    const numeroRepetidos = numeros.reduce((acc, val) => {
+        if (acc[val]) acc[val]++;
+        else acc[val] = 1;
+        return acc;
+    }, {});
+    res.send(numeroRepetidos);
 });
 
 export default routerRandomNums;
